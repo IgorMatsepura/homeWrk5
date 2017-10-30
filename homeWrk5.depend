@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1509273724 source:c:\c+\proba\main.cpp
+1509374573 source:c:\c+\proba\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
