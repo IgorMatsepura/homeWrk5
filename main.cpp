@@ -21,18 +21,13 @@ char* memLetter;                            //init memory for array
     if ((char*)malloc(numberLetter*sizeof(char))== NULL) {
         printf ("Memory allocation error...");
         return 1;
-        }
+    }
 
     for (;;){
         memset(letterAlphabet, 0, sizeof(letterAlphabet));
         printf("Enter some string: ");
         gets(letterInput);
         sizeLetter = strlen(letterInput);
-        //An attempt to re-initialize the allocated memory
-        if (sizeLetter >= numberLetter){
-            memLetter = (char*)realloc(memLetter, numberLetter*sizeof(char*));
-            memLetter = (char*)(malloc(sizeLetter +1));
-        }
 
         if (strlen(letterInput) == NULL){
             printf("Please of characters entered...Retry again...\n");
@@ -58,64 +53,26 @@ char* memLetter;                            //init memory for array
         // Search words in strings
         sizeLetter = strlen(letterInput);
         if (sizeLetter > WORDS){
-            wordsNumber = 0;
-
-            for(;;){
-
-                for ( i; i < strlen(letterInput); i++) {
-                    letter = tolower(letterInput[i]);
-
-                    if (!(letter) == isalpha(letter)){
+            for (i=0, wordsNumber =0; letterInput[i]!='\0';){
+                for (;!isalpha(letterInput[i]) && letterInput[i]!='\0'; i++) ;
+                    if (isalpha(letterInput[i])){
                         wordsNumber++;
-                    // if user enter not letter. Cycle search words
-                        while (!isalpha(letter)){
-                                letter = tolower(letterInput[i]);
-                                letterInput[i++];
-
-                            if (letter == isalpha(letter) && isalpha(letter) || !letter == '0' ) {
-                                wordsNumber++;
-                                printf("The letter in worlds %d \n"  , wordsNumber);
-                            }
-
-                            if (isalpha(letter)){
-                                tolower(letterInput[i--]);
-                                i--;
-                                break;
-                            }
-
-                            if (sizeLetter == i && isalpha(letter) || letter == '0' ){
-                                printf("The letter in worlds %d \n"  , wordsNumber);
-                                break;
-                            }
-
-                            if (sizeLetter == i && !isalpha(letter)){
-                                if (wordsNumber > 0){
-                              //  wordsNumber = 0;
-                                break;
-                                }
-                                else {
-                                    wordsNumber = 0;
-                                    break;
-                                }
-                            }
-                        }
+                        for (;isalpha(letterInput[i]); i++);
                     }
-                }
-                if (sizeLetter == i && isalpha(letter)){
-                    wordsNumber++;
-                }
-
-                if (wordsNumber > 0){
-                    printf("The worlds is a string: %d \n"  , wordsNumber);
-                } else {
-                    printf("Number of characters entered...Retry again...\n");
-                }
-                break;
             }
+            if (wordsNumber==0){
+                printf("The worlds is not a string...\n");
+            } else {
+                printf("The worlds is a string: %d \n"  , wordsNumber);
+            }
+            continue;
         }
     }
     free(memLetter);
 }
+
+
+
 
 
 
